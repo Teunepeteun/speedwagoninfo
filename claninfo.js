@@ -40,7 +40,7 @@ function pushToGitHub() {
         // Add, commit, and push the file to GitHub
         execSync(`git add .`);
         execSync(`git commit -m "Add data file"`);
-        execSync(`git push orgin 'main'`);
+        execSync(`git push`);
 
         console.log('Data file pushed to GitHub successfully.');
     } catch (error) {
