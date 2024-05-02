@@ -36,7 +36,7 @@ function pushToGitHub() {
         const username = 'Teunepeteun';
         const repo = 'speedwagoninfo';
         const branch = 'main';
-        const token = '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';
+        const token = '';
 
         // Add, commit, and push the file to GitHub
         execSync(`git add .`);
