@@ -36,11 +36,12 @@ function pushToGitHub() {
         const username = 'Teunepeteun';
         const repo = 'speedwagoninfo';
         const branch = 'main';
+        const token = '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';
 
         // Add, commit, and push the file to GitHub
         execSync(`git add .`);
         execSync(`git commit -m "Add data file"`);
-        execSync(`git push`);
+        execSync(`git push https://${token}@github.com/${username}/${repo} 'main'`);
 
         console.log('Data file pushed to GitHub successfully.');
     } catch (error) {
