@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>API Request</title>
+<style>
+div {
+  font-size: 20px;
+  font-family: "Lucida Console";
+  height: auto;
+  width: 100%;
+}
+h1 {
+  font-size: 25px;
+  font-family: "Lucida Console", bold;
+}
+p1 {
+  font-size: 20px;
+  font-family: "Lucida Console", bold;
+}
+p2 {
+  font-size: 10px;
+  font-family: "Lucida Console";
+  color: gray;
+}
+img {
+  width: 25px;
+  height; 25px;
+}
+</style>
+</head>
+<body>
+    <h1>Members:</h1>
+    <div id="result"></div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            
+            const apiUrl = 'https://raw.githubusercontent.com/Teunepeteun/speedwagoninfo/main/speedwagon.json';
+
+            // Function to fetch data from the API
+            function fetchData() {
+                fetch(apiUrl, {
+                    
+                })
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Network response was not ok');
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    // Display the data in the HTML
+                    const resultDiv = document.getElementById('result');
+                    resultDiv.innerHTML = ''; // Clear previous results
+
+                    // Check if memberList exists in the data
+                    if (data.memberList && data.memberList.length > 0) {
+                        // Loop through each item in memberList and display name
+                        data.memberList.forEach(member => {
+                            const name = member.name;
+const tag = member.tag;
+const clanrank = member.clanRank;
+const role = member.role;
+const trophies = member.trophies;
+const leagueIcon = member.league.iconUrls.tiny;
+const donation = member.donations;
+
+const img = document.createElement('img');
+        img.src = leagueIcon;
+                            const nameElement = document.createElement('p');
+                            nameElement.innerHTML = `<h1>${clanrank}.<img src='${leagueIcon}'>${name}<p2> ${tag}</p2></h1><p1>${role}</p1><br><p1>Trophies: ${trophies}</p1><br><p1>Troops donated: ${donation}`;
+                            resultDiv.appendChild(nameElement);
+                        });
+                    } else {
+                        resultDiv.textContent = 'No members found.';
+                    }
+                })
+                .catch(error => {
+                    console.error('There was a problem with the fetch operation:', error);
+                });
+            }
+
+            // Add event listener to the button
+            window.onload = fetchData;
+        });
+    </script>
+</body>
+</html>
